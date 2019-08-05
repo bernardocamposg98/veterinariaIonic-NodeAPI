@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Mascota } from '../interfaces/interfaces';
 import { ApiService } from '../services/api.service';
 import { Routes } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab4',
@@ -19,14 +19,20 @@ export class Tab4Page implements OnInit {
   color: string;
   id: number;
   dataFromService:any="";
+  usuario1: string;
 
-  constructor(private mascotaCRUD: ApiService, private alertCtrl: AlertController) {}
+
+  constructor(public nav: NavController,private mascotaCRUD: ApiService, private alertCtrl: AlertController) {}
 
   ngOnInit() {
+    let usuario = localStorage.getItem("usuario");
+    if(usuario == "user" || usuario == "admin"){
+    } else { this.nav.navigateForward('/');}
     this.mascotaCRUD.traerMascotas()
     .subscribe(metodo => {
       console.log(metodo);
       this.articles = metodo;
+      this.usuario1 = usuario;
     });
   }
 

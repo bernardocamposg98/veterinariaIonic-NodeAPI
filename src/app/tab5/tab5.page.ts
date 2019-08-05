@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Sucursal } from '../interfaces/interfaces';
 import { ApiService } from '../services/api.service';
 import { Routes } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab5',
@@ -19,14 +19,19 @@ export class Tab5Page implements OnInit {
   cel: string;
   id: number;
   dataFromService:any="";
+  usuario1: string;
 
-  constructor(private sucursalCRUD: ApiService, private alertCtrl: AlertController) {}
+  constructor(public nav: NavController,private sucursalCRUD: ApiService, private alertCtrl: AlertController) {}
 
   ngOnInit() {
+    let usuario = localStorage.getItem("usuario");
+    if(usuario == "user" || usuario == "admin"){
+    } else { this.nav.navigateForward('/');}
     this.sucursalCRUD.traerSucursales()
     .subscribe(metodo => {
       console.log(metodo);
       this.articles = metodo;
+      this.usuario1 = usuario;
     });
   }
 

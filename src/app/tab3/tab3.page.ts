@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Medicina } from '../interfaces/interfaces';
 import { ApiService } from '../services/api.service';
 import { Routes } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -18,14 +18,19 @@ export class Tab3Page implements OnInit {
   costo: string;
   id: number;
   dataFromService:any="";
+  usuario1: string;
 
-  constructor(private medicinasCRUD: ApiService, private alertCtrl: AlertController) {}
+  constructor(public nav: NavController,private medicinasCRUD: ApiService, private alertCtrl: AlertController) {}
 
   ngOnInit() {
+    let usuario = localStorage.getItem("usuario");
+    if(usuario == "user" || usuario == "admin"){
+    } else { this.nav.navigateForward('/');}
     this.medicinasCRUD.traerMedicinas()
     .subscribe(metodo => {
       console.log(metodo);
       this.articles = metodo;
+      this.usuario1 = usuario;
     });
   }
 

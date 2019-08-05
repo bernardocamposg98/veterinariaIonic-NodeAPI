@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from '../interfaces/interfaces';
 import { ApiService } from '../services/api.service';
 import { Routes } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -18,14 +18,19 @@ export class Tab2Page implements OnInit {
   costo: string;
   id: number;
   dataFromService:any="";
+  usuario1: string;
 
-  constructor(private productoCRUD: ApiService, private alertCtrl: AlertController) {}
+  constructor(public nav: NavController,private productoCRUD: ApiService, private alertCtrl: AlertController) {}
 
   ngOnInit() {
+    let usuario = localStorage.getItem("usuario");
+    if(usuario == "user" || usuario == "admin"){
+    } else { this.nav.navigateForward('/');}
     this.productoCRUD.traerProductos()
     .subscribe(metodo => {
       console.log(metodo);
       this.articles = metodo;
+      this.usuario1 = usuario;
     });
   }
 

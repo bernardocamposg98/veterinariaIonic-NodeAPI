@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { Router } from  "@angular/router";
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab6',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab6Page implements OnInit {
   urlapi: string;
-  constructor() { }
+  constructor(public nav: NavController) { }
 
   ngOnInit() {
   }
@@ -15,10 +18,8 @@ export class Tab6Page implements OnInit {
     window.location.reload();
   } 
   aceptar() {
-    localStorage.setItem("link", this.urlapi);
-    let url = this.urlapi;
-    console.log(url);
-    this.reload();
+    localStorage.setItem("usuario", "cerrado");
+    this.nav.navigateForward('/');
   }
 
 }

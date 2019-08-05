@@ -3,7 +3,7 @@ import { Empleado } from '../interfaces/interfaces';
 import { ApiService } from '../services/api.service';
 import { Routes } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -21,25 +21,28 @@ export class Tab1Page implements OnInit {
   id: number;
   dataFromService:any="";
   url1: string;
+  usuario1: string;
   
 
-  constructor(private empleadoCRUD: ApiService, private alertCtrl: AlertController) {}
+  constructor(public nav: NavController,private empleadoCRUD: ApiService, private alertCtrl: AlertController) {}
 
-  obtenerURL(){
+  obtenerURL(){ 
     let urlapi = localStorage.getItem("link");
     this.url1 = urlapi;
     this.url1 =  "http://e7ba1582.ngrok.io/";
-    console.log("HolaGUapo"+this.url1);
 }
 
   ngOnInit() {
+    let usuario = localStorage.getItem("usuario");
+    if(usuario == "user" || usuario == "admin"){
+    } else { this.nav.navigateForward('/');}
     this.empleadoCRUD.traerEmpleados()
     .subscribe(metodo => {
       console.log(metodo);
       this.articles = metodo;
+      this.usuario1 = usuario;
     });
     this.obtenerURL();
-    console.log("hola"+this.url1)
   }
 
   reload() {
@@ -47,6 +50,7 @@ export class Tab1Page implements OnInit {
   } 
 
   agregarEmpleado() {
+    
     var dataToSend = {
       nombre: this.nombre,
       cel: this.cel,
