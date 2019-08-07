@@ -20,6 +20,7 @@ export class Tab4Page implements OnInit {
   id: number;
   dataFromService:any="";
   usuario1: string;
+  miBuscador: string;
 
 
   constructor(public nav: NavController,private mascotaCRUD: ApiService, private alertCtrl: AlertController) {}
@@ -34,6 +35,7 @@ export class Tab4Page implements OnInit {
       this.articles = metodo;
       this.usuario1 = usuario;
     });
+    this.miBuscador = "";
   }
 
   reload() {

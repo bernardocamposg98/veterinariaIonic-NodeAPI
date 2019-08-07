@@ -22,6 +22,7 @@ export class Tab1Page implements OnInit {
   dataFromService:any="";
   url1: string;
   usuario1: string;
+  miBuscador: string;
   
 
   constructor(public nav: NavController,private empleadoCRUD: ApiService, private alertCtrl: AlertController) {}
@@ -42,7 +43,8 @@ export class Tab1Page implements OnInit {
       this.articles = metodo;
       this.usuario1 = usuario;
     });
-    this.obtenerURL();
+    this.obtenerURL(); 
+    this.miBuscador = "";
   }
 
   reload() {

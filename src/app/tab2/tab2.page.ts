@@ -19,6 +19,7 @@ export class Tab2Page implements OnInit {
   id: number;
   dataFromService:any="";
   usuario1: string;
+  miBuscador: string;
 
   constructor(public nav: NavController,private productoCRUD: ApiService, private alertCtrl: AlertController) {}
 
@@ -32,6 +33,7 @@ export class Tab2Page implements OnInit {
       this.articles = metodo;
       this.usuario1 = usuario;
     });
+    this.miBuscador = "";
   }
 
   reload() {

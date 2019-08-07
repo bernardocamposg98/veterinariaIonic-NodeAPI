@@ -19,7 +19,8 @@ export class Tab3Page implements OnInit {
   id: number;
   dataFromService:any="";
   usuario1: string;
-
+  miBuscador: string;
+  
   constructor(public nav: NavController,private medicinasCRUD: ApiService, private alertCtrl: AlertController) {}
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class Tab3Page implements OnInit {
       this.articles = metodo;
       this.usuario1 = usuario;
     });
+    this.miBuscador = "";
   }
 
   reload() {

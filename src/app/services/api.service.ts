@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
-import { Empleado, Producto, Mascota, Medicina, Sucursal } from '../interfaces/interfaces';
+import { Empleado, Producto, Mascota, Medicina, Sucursal, Usuario } from '../interfaces/interfaces';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 const apiUrl = environment.apiUrl;
@@ -157,6 +157,35 @@ export class ApiService {
     eliminarSucursal(editValor: string) {
         this.obtenerURL();
         var url = (this.ruta + "/sucursaleliminar" + '/' + editValor );
+        return this.http.get(url,
+        {
+        params: new HttpParams().set('id', editValor),
+        });
+    }
+
+    //Usuario
+    traerUsuario() {
+        this.obtenerURL();
+        return this.http.get<Usuario>(this.ruta + "/usuario");
+    }
+    agregarUsuario(dataToSend) {
+        this.obtenerURL(); 
+        return this.http.post((this.ruta + "/usuario"),dataToSend,
+        {headers:new HttpHeaders(
+        {"content-Type": "application/json"})});
+    }
+    editarUsuario(dataToSend, editValor: string) {
+        this.obtenerURL();
+        var url = ((this.ruta + "/usuario") + '/' + editValor );
+        return this.http.post(url,dataToSend,
+        {
+        headers: new HttpHeaders().set('Authorization', 'my-token-de-autoriazación'),
+        params: new HttpParams().set('id', editValor),
+        });
+    }
+    eliminarUsuario(editValor: string) {
+        this.obtenerURL();
+        var url = (this.ruta + "/usuarioeliminar" + '/' + editValor );
         return this.http.get(url,
         {
         params: new HttpParams().set('id', editValor),

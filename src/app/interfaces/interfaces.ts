@@ -1,3 +1,15 @@
+export interface Usuario {
+    usuarios: ConstructorUsuario[];
+}
+export interface ConstructorUsuario {
+    id: number;
+    nombre: string;
+    password: string;
+    rol: string;
+    //created_at: string;
+    //updated_at: string;
+}
+//////////////////////////////////
 export interface Empleado {
     usuarios: ConstructorEmpleado[];
 }

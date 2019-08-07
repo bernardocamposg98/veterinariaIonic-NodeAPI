@@ -14,6 +14,7 @@ export class LoginPage implements OnInit {
   data:any={};
   url;
   urlapi;
+  username;
 
   constructor(public http:  HttpClient, public nav: NavController, private  router:  Router) { 
     this.data.username = '';
@@ -48,11 +49,14 @@ export class LoginPage implements OnInit {
       console.log(data);
       let navigator = data[0].rol;
       if(navigator == 'admin'){
-        //console.log('ajas')
+        localStorage.setItem("username", this.data.username);
+        
         localStorage.setItem("usuario", "admin");
         this.nav.navigateForward('/tabs/tabs/tab1');
       }
       else if(navigator == 'user'){
+        localStorage.setItem("username", this.data.username);
+
         localStorage.setItem("usuario", "user");
         this.nav.navigateForward('/tabs/tabs/tab1');
       }else{
